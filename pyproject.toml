@@ -1,0 +1,57 @@
+[project]
+name = "patchwork-mcp-server"
+version = "0.1.0"
+description = "Read-only MCP server for Patchwork (patchwork.kernel.org and other instances)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Yuya Kusakabe", email = "yuya.kusakabe@gmail.com" }]
+keywords = ["mcp", "patchwork", "kernel", "netdev", "patchwork.kernel.org"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Version Control",
+]
+dependencies = [
+    "mcp>=1.2",
+    "httpx>=0.27",
+]
+
+[project.urls]
+Homepage = "https://github.com/higebu/patchwork-mcp-server"
+Repository = "https://github.com/higebu/patchwork-mcp-server"
+Issues = "https://github.com/higebu/patchwork-mcp-server/issues"
+
+[project.scripts]
+patchwork-mcp-server = "patchwork_mcp_server.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "respx>=0.21",
+    "ruff>=0.14",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/patchwork_mcp_server"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "W", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
