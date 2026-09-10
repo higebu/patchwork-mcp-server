@@ -88,7 +88,8 @@ class PatchworkClient:
     def comments(self, kind: str, item_id: int) -> list[dict]:
         if kind not in ("patch", "cover"):
             raise ValueError("kind must be 'patch' or 'cover'")
-        return self.request(f"/api/{kind}s/{item_id}/comments/")
+        resource = "patches" if kind == "patch" else "covers"
+        return self.request(f"/api/{resource}/{item_id}/comments/")
 
     def people(self, q: str) -> list[dict]:
         return self.request("/people/", q=q)
